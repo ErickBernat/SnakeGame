@@ -19,8 +19,6 @@ section{
 
 .containerJogo{
     background-color: rgb(129, 48, 48);
-    width: 50%;
-    height: 80%;
     display: grid;
     grid-template-columns: repeat(30, 1fr);
     grid-template-rows: repeat(30, 1fr);
@@ -32,7 +30,7 @@ section{
     width: 100%;
     height: 100%;
     font-family: fontTitulo;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -80,6 +78,13 @@ section{
     width: auto;
     height: auto;
     background-color: aqua;
+}
+
+.bomba{
+    width: auto;
+    height: auto;
+    background-color: black;
+    border: solid 2px white;
 }
 
 .cobra{
