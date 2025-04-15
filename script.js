@@ -3,6 +3,7 @@ let menuGame = document.getElementById('menuGame');
 let containerJogo = document.querySelector('.containerJogo');
 let botoes =  document.querySelectorAll('.botoes');
 let pontuacao =  document.getElementById('pontuacao');
+let pergaminho = document.getElementById('pergaminho')
 let regras = document.querySelector('.containerRegras')
 let arrayCobra = [];
 let comidaX=0, comidaY=0;
@@ -106,14 +107,11 @@ containerJogo.innerHTML = html
 }
 
 function fechaRegras(){
-    console.log('apertou')
-   
+            regras.style.display = 'none' 
 }
 
 function visualizacaoModaRegras(){
-    console.log('apertou')
      regras.style.display = 'flex'
-     console.log(regras)
 }
 
 function adidionaEventoBotoes(){

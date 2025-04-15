@@ -65,7 +65,7 @@ section{
     background-size: 100% 110%;
     background-repeat: no-repeat;
     transform-origin: left;
-    animation: animaPergaminho 2s ease;
+    animation: abrePergaminho 2s ease;
 
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@ section{
     width: 40%;
     height: 80%;
     transform-origin: left;
-    animation: animaPergaminho 2s ease;
+    animation: abrePergaminho 2s ease;
 
     display: flex;
     flex-direction: column;
@@ -137,12 +137,12 @@ section{
     }
 }
 
-@keyframes animaPergaminho {
+@keyframes abrePergaminho {
     0%{
         transform: scaleX(0);
     }
     100%{
-        transform: scale(1);
+        transform: scaleX(1);
     }
 }
 
@@ -254,7 +254,7 @@ section{
 .cobraCabeca{
     width: auto;
     height: auto;
-    background-color:#FAF6A8;
+    background-color: #e65715;
     border-radius: 0px 0px 0px 0px;
     background-position: 100% 90%;
     background-repeat: no-repeat;
