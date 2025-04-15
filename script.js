@@ -3,6 +3,7 @@ let menuGame = document.getElementById('menuGame');
 let containerJogo = document.querySelector('.containerJogo');
 let botoes =  document.querySelectorAll('.botoes');
 let pontuacao =  document.getElementById('pontuacao');
+let regras = document.querySelector('.containerRegras')
 let arrayCobra = [];
 let comidaX=0, comidaY=0;
 let armadilhaX=0, armadilhaY=0;
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
         <img src="./assets/images/pngtree-chinese-dragon-culture-mythological-animal-vector-png-image_23483686.png" alt="">
     <div class="botoesGame">
             <button onclick="adidionaEventoBotoes()" id="botaoStart" class="botoes">Start</button>
-            <button class="botoes">Regras</button>
+            <button onclick="visualizacaoModaRegras()" class="botoes">Regras</button>
     </div>
     </div>
     `
@@ -102,6 +103,17 @@ for(let contador =1; contador<arrayCobra.length;contador++){
 
 containerJogo.innerHTML = html
   pontuacao.innerHTML=`<h2>pontuacao: ${arrayCobra.length-1}</h2>`;
+}
+
+function fechaRegras(){
+    console.log('apertou')
+   
+}
+
+function visualizacaoModaRegras(){
+    console.log('apertou')
+     regras.style.display = 'flex'
+     console.log(regras)
 }
 
 function adidionaEventoBotoes(){
