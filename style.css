@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: fontTitulo;
+    src: url(./assets/fonts/chinese\ rocks\ rg.otf);
+}
+
+section{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerJogo{
+    background-color: rgb(129, 48, 48);
+    width: 50%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    grid-template-rows: repeat(30, 1fr);
+}
+
+.menuGame{
+    background-color: rgb(165, 42, 42);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-family: fontTitulo;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    img{
+        width: 800px;
+        height: auto;
+    }
+
+
+    .tituloGame{
+        width: auto;
+        h2{
+            font-size: 10rem;
+        }
+
+        .version{
+            text-align: end;
+            h3{
+                font-size: 3rem;
+            }
+        }
+    }
+    
+
+    .botoesGame{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        button{
+            font-family: fontTitulo;
+            font-size: 2rem;
+            width: 170px;
+            height: 80px;
+            cursor: pointer;
+        }
+    }
+}
+
+.maca{
+    width: auto;
+    height: auto;
+    background-color: aqua;
+}
+
+.cobra{
+    width: 100%;
+    height: auto;
+    background-color: rgb(51, 51, 51);
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    background-size: 100px;
+}
+
+.cobraCabeca{
+    width: auto;
+    height: auto;
+    background-color: black;
+    background-position: 100% 90%;
+    background-repeat: no-repeat;
+    background-size:70px;
+}
+
+.muro{
+    width: auto;
+    height: auto;
+    background-color: pink;
+}
