@@ -72,6 +72,10 @@ if(gameover){
         arrayCobra.push([ultimaParte]);
     }
 
+    if(cobraX === bombaX && cobraY === bombaY){
+        gameover = true
+    }
+
         for(let i = arrayCobra.length-1 ; i > 0; i--){
         arrayCobra[i] = arrayCobra[i-1]
     }
@@ -165,7 +169,7 @@ function verificaComeuMaca(){
     
 }
 
-setintervalId = setInterval(geraBomba,3000);
+setintervalId = setInterval(geraBomba,5000);
 
 setintervalId = setInterval(iniciaJogo,200);
 setintervalId = setInterval(verificaComeuMaca,3000);
