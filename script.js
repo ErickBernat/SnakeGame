@@ -2,41 +2,44 @@
 let menuGame = document.getElementById('menuGame');
 let containerJogo = document.querySelector('.containerJogo');
 let botoes =  document.querySelectorAll('.botoes');
+let pontuacao =  document.getElementById('pontuacao');
 let arrayCobra = [];
-let gameover = false;
-let macaX=0, macaY=0;
-let bombaX=0, bombaY=0;
+let comidaX=0, comidaY=0;
+let armadilhaX=0, armadilhaY=0;
 let width = 50, height= 80;
 let setintervalId =0;
 let setintervalId2 =0;
 let cobraX=5,cobraY=5;
 let velocidadeX=0, velocidadeY=0;
-let comeuMaca = false;
 let contador=1
-let grid=30;
+let grid=20;
+let comeuMaca = false;
+let gameover = false;
+
 
 document.addEventListener('DOMContentLoaded' ,()=>{
     containerJogo.style.width = `${width}%`;
     containerJogo.style.height = `${height}%`;
-
     menuGame.innerHTML+=`
-    <div class="tituloGame">
-                        <h2>Snake Game</h2>
-                        <div class="version">
-                            <h3>Version Chinese</h3>
-                        </div>
-                        
-                    </div>
-                    <img src="./assets/images/pngtree-chinese-dragon-culture-mythological-animal-vector-png-image_23483686.png" alt="">
-                    <div class="botoesGame">
-                        <button onclick="adidionaEventoBotoes()" id="botaoStart" class="botoes">Start</button>
-                        <button class="botoes">Menu</button>
-                    </div>
+                          
+    <div class="infoMenu">
+                    <div class="tituloGame">
+        <h2>Snake Game</h2>
+        <div class="version">
+            <h3>Version Chinese</h3>
+        </div>                    
+    </div>
+        <img src="./assets/images/pngtree-chinese-dragon-culture-mythological-animal-vector-png-image_23483686.png" alt="">
+    <div class="botoesGame">
+            <button onclick="adidionaEventoBotoes()" id="botaoStart" class="botoes">Start</button>
+            <button class="botoes">Regras</button>
+    </div>
+    </div>
     `
 })
 
 
-geraMaca()
+geraComida()
 
 function iniciaJogo(){
 let html;
@@ -51,32 +54,24 @@ if(gameover){
 
 
     html =`
-        <div id='maca' class='maca' style="grid-area:${macaY}/${macaX};" ></div>
+        <div id='comida' class='comida' style="grid-area:${comidaY}/${comidaX};" ></div>
     `   
     html +=`
-    <div id='bomba' class='bomba' style="grid-area:${bombaY}/${bombaX};" ></div>
-` 
-      html+=`<div id='muro' class='muro' style=" grid-area:${1}/${7};" ></div>`
+    <div id='armadilha' class='armadilha' style="grid-area:${armadilhaY}/${armadilhaX};" ></div>
+    ` 
 
-    if(cobraX === macaX && cobraY === macaY){
-            console.log('Comeu')
-            width+=1
-            height+=1
-            grid+=3
-            containerJogo.style.width = `${width}%`;
-            containerJogo.style.height = `${height}%`;
-
-        geraMaca();
- 
+    if(cobraX ===comidaX && cobraY === comidaY){
+        geraComida();
+      
         let ultimaParte = arrayCobra[arrayCobra.length - 1];
         arrayCobra.push([ultimaParte]);
     }
 
-    if(cobraX === bombaX && cobraY === bombaY){
+    if(cobraX === armadilhaX && cobraY === armadilhaY){
         gameover = true
     }
 
-        for(let i = arrayCobra.length-1 ; i > 0; i--){
+    for(let i = arrayCobra.length-1 ; i > 0; i--){
         arrayCobra[i] = arrayCobra[i-1]
     }
     
@@ -91,7 +86,6 @@ if(gameover){
             gameover = true
         }
     }
-    console.log(arrayCobra[0][0])
 
     if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] >= 30 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >=30  )){
         gameover = true;
@@ -107,19 +101,25 @@ for(let contador =1; contador<arrayCobra.length;contador++){
 
 
 containerJogo.innerHTML = html
-
+  pontuacao.innerHTML=`<h2>pontuacao: ${arrayCobra.length-1}</h2>`;
 }
 
 function adidionaEventoBotoes(){
     menuGame.style.display = 'none'
+    setintervalId = setInterval(geraArmadilha,5000);
+    setintervalId = setInterval(iniciaJogo,200);
 }
 
 
 
-document.addEventListener('keydown',movimentaCobra)
+document.addEventListener('keydown',movimentaDragao)
 
-function movimentaCobra(tecla){
+function movimentaDragao(tecla){
     console.log(tecla.key)
+
+    setTimeout(() => {
+        
+    }, 100);
 
     if(tecla.key == 'ArrowUp' && velocidadeY != 1){
         velocidadeX = 0
@@ -146,30 +146,23 @@ function reiniciaJogo(){
     location.reload()
 }
 
-function geraMaca(){
-    macaX = Math.floor(Math.random(grid)*grid)+1;
-    macaY =  Math.floor(Math.random(grid)*grid)+1;
+function geraComida(){
+    comidaX = Math.floor(Math.random(grid)*grid)+1;
+    comidaY =  Math.floor(Math.random(grid)*grid)+1;
 }
-function geraBomba(){
-    bombaX = Math.floor(Math.random(grid)*grid)+1;
-    bombaY =  Math.floor(Math.random(grid)*grid)+1;
-}
+function geraArmadilha(){
+    armadilhaX = Math.floor(Math.random(grid)*grid)+1;
+    armadilhaY =  Math.floor(Math.random(grid)*grid)+1;
+    for(let i=1; i< arrayCobra.length; i++){
+        if(arrayCobra[0][0] == armadilhaX && arrayCobra[0][1] == armadilhaY){
+            geraArmadilha()
+        }
+    }
 
-
-function verificaComeuMaca(){
-    console.log('entrou')
-    console.log(comeuMaca)
-        console.log('naoComeu')
-        width-=contador
-        height-=contador
-        grid-=3;
-        containerJogo.style.width = `${width}%`;
-        containerJogo.style.height = `${height}%`;
-
-    
+    if(armadilhaX == comidaX || armadilhaY == comidaY){
+        geraArmadilha()
+    }
 }
 
-setintervalId = setInterval(geraBomba,5000);
 
-setintervalId = setInterval(iniciaJogo,200);
-setintervalId = setInterval(verificaComeuMaca,3000);
+
