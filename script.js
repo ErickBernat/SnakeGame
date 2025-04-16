@@ -14,15 +14,14 @@ let comidaX=0, comidaY=0;
 let armadilhaX=0, armadilhaY=0;
 let width = 50, height= 80;
 let setintervalId =0;
-let setintervalId2 =0;
 let cobraX=10,cobraY=10;
 let velocidadeX=0, velocidadeY=0;
-let contador=1
 let grid=20;
 let comeuMaca = false;
 let gameover = false;
-let cobraPosicao = 'baixo'
+let cobraDirecao = 'baixo'
 let jogoAtivo = true;
+let podeMover = true;
 
 
 
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
     </div>
         <img src="./assets/images/pngtree-chinese-dragon-culture-mythological-animal-vector-png-image_23483686.png" alt="">
     <div class="botoesGame">
-            <button onclick="adidionaEventoIniciaJogo()" id="botaoStart" class="botoes">Start</button>
+            <button onclick="adicionaEventoIniciaJogo()" id="botaoStart" class="botoes">Start</button>
             <button onclick="visualizacaoModaRegras()" class="botoes">Regras</button>
     </div>
     </div>
@@ -120,20 +119,20 @@ containerJogo.innerHTML = html
 
    
 
-  if(cobraPosicao == 'cima'){
+  if(cobraDirecao == 'cima'){
     cobraCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
     cobraCabeça.style.backgroundPosition = '-7px -7px';
   }
-  if(cobraPosicao == 'baixo'){
+  if(cobraDirecao == 'baixo'){
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
   
     cobraCabeça.style.backgroundPosition = '-10px -21px';
   }
-  if(cobraPosicao == 'direito'){
+  if(cobraDirecao == 'direito'){
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
     cobraCabeça.style.backgroundPosition = '-15px -20px';
   }
-  if(cobraPosicao == 'esquerdo'){
+  if(cobraDirecao == 'esquerdo'){
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
     cobraCabeça.style.backgroundPosition = '-6px -10px'
 }
@@ -153,24 +152,23 @@ regras.addEventListener('click',()=>{
 
  })
 
-function adidionaEventoIniciaJogo(){
+function adicionaEventoIniciaJogo(){
     jogoAtivo = true
     menuGame.style.display = 'none'
     setintervalId = setInterval(geraArmadilha,5000);
     setintervalId = setInterval(iniciaJogo,100);
     
 }
-let podeMover = true; // controla se pode ou não mover
+
 function movimentaDragao(tecla){
     if (!jogoAtivo || !podeMover) {
         return;
     }
 
-    // Bloqueia movimentações por 100ms
     podeMover = false;
     setTimeout(() => {
         podeMover = true;
-    }, 100); // tempo em milissegundos
+    }, 100);
 
     if(jogoAtivo == false){
         return
@@ -183,23 +181,23 @@ function movimentaDragao(tecla){
     if(tecla.key == 'ArrowUp' && velocidadeY != 1){
         velocidadeX = 0
         velocidadeY = -1
-        cobraPosicao = 'cima'
+        cobraDirecao = 'cima'
 
     }
     if(tecla.key == 'ArrowDown' && velocidadeY != -1){
         velocidadeX = 0
         velocidadeY = 1
-        cobraPosicao = 'baixo'
+        cobraDirecao = 'baixo'
     }
     if(tecla.key == 'ArrowLeft' && velocidadeX != 1){
         velocidadeX = -1
         velocidadeY = 0
-        cobraPosicao = 'esquerdo'
+        cobraDirecao = 'esquerdo'
     }
     if(tecla.key == 'ArrowRight' && velocidadeX != -1){
         velocidadeX = 1
         velocidadeY =0
-         cobraPosicao = 'direito'
+         cobraDirecao = 'direito'
     }
 }
 
