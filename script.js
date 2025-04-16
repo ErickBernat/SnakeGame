@@ -7,6 +7,8 @@ let pergaminho = document.getElementById('pergaminho');
 let regras = document.querySelector('.containerRegras');
 let modalDerrota = document.querySelector('#derrota')
 let cobraCabeça = document.querySelector('#cobraCabeca');
+let containerItensPergaminho =  document.querySelector('#containerItensPergaminho');
+let pontuacaoDerrota = document.getElementById('pontuacaoDerrota')
 let arrayCobra = [];
 let comidaX=0, comidaY=0;
 let armadilhaX=0, armadilhaY=0;
@@ -52,15 +54,12 @@ geraArmadilha()
 function iniciaJogo(){
 let html;
 
-if(gameover){
-    reiniciaJogo()
+
+if(gameover == true){
+
+    gameOver()
     return
 }
-
-
-
-
-
 
 
     html =`
@@ -79,6 +78,8 @@ if(gameover){
 
     if(cobraX === armadilhaX && cobraY === armadilhaY){
         gameover = true
+        console.log('entrou == comida')
+        return
     }
 
     for(let i = arrayCobra.length-1 ; i > 0; i--){
@@ -94,11 +95,15 @@ if(gameover){
     for(let i=1; i< arrayCobra.length; i++){
         if(arrayCobra[0][0] == arrayCobra[i][0] && arrayCobra[0][1] == arrayCobra[i][1]){
             gameover = true
+            console.log('entrou == se bateu')
+            return
         }
     }
 
-    if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] >20 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >20  )){
+    if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] > 20 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >20  )){
         gameover = true;
+        console.log('entrou == bateuNoMuro')
+        return
     }
 
 
@@ -108,7 +113,6 @@ if(gameover){
 for(let contador =1; contador<arrayCobra.length;contador++){
     
     html+=`<div id='cobra${contador}' class='cobraCorpo' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};" ></div>`
-   console.log('mudou')
 
 }
 
@@ -136,6 +140,8 @@ containerJogo.innerHTML = html
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
 }
 
+
+console.log(gameover)
 }
 
 function fechaRegras(){
@@ -148,15 +154,16 @@ function visualizacaoModaRegras(){
 }
 
 regras.addEventListener('click',()=>{
-    console.log('apertou')
     regras.style.display = 'none'
 
  })
 
 function adidionaEventoBotoes(){
+
     menuGame.style.display = 'none'
     setintervalId = setInterval(geraArmadilha,5000);
     setintervalId = setInterval(iniciaJogo,100);
+    
 }
 
 
@@ -188,10 +195,27 @@ function movimentaDragao(tecla){
     }
 }
 
-
 function reiniciaJogo(){
     gameover = false
+    cobraX=5;
+    cobraY=5;
+    velocidadeX=0, velocidadeY=0;
+    arrayCobra = []
+    geraArmadilha()
+    geraComida()
+    modalDerrota.style.display = 'none'
+    iniciaJogo()
+}
+
+function voltaMenu(){
+    location.reload()
+}
+
+function gameOver(){
+    gameover = false
     modalDerrota.style.display = 'flex'
+    pontuacaoDerrota.innerHTML = `<h2>${arrayCobra.length-1}</h2>`
+    
 }
 
 function geraComida(){
