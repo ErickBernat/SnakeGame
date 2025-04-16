@@ -93,8 +93,6 @@ if(gameover){
     
     for(let i=1; i< arrayCobra.length; i++){
         if(arrayCobra[0][0] == arrayCobra[i][0] && arrayCobra[0][1] == arrayCobra[i][1]){
-
-            console.log(arrayCobra[i][0][1])
             gameover = true
         }
     }
@@ -110,13 +108,14 @@ if(gameover){
 for(let contador =1; contador<arrayCobra.length;contador++){
     
     html+=`<div id='cobra${contador}' class='cobraCorpo' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};" ></div>`
-
+   console.log('mudou')
 
 }
 
 
 containerJogo.innerHTML = html
   pontuacao.innerHTML=`<h2>pontuacao: ${arrayCobra.length-1}</h2>`;
+  pontuacao.innerHTML+=`<h2>pontuacao Maxima: ${arrayCobra.length-1}</h2>`
 
   cobraCabeça = document.querySelector('#cobraCabeca');
 
@@ -125,21 +124,10 @@ containerJogo.innerHTML = html
 
   if(cobraPosicao == 'cima'){
       cobraCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
-      let cobraCorpo = document.querySelectorAll(`.cobraCorpo`);
-
-      cobraCorpo.forEach(item =>{
-          console.log(item)
-           item.style.backgroundColor = 'red'
-      })
+      
   }
   if(cobraPosicao == 'baixo'){
       cobraCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
-      let cobraCorpo = document.querySelectorAll(`.cobraCorpo`);
-
-      cobraCorpo.forEach(item =>{
-          console.log(item)
-           item.style.backgroundColor = 'red'
-      })
   }
   if(cobraPosicao == 'direito'){
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
@@ -168,7 +156,7 @@ regras.addEventListener('click',()=>{
 function adidionaEventoBotoes(){
     menuGame.style.display = 'none'
     setintervalId = setInterval(geraArmadilha,5000);
-    setintervalId = setInterval(iniciaJogo,200);
+    setintervalId = setInterval(iniciaJogo,100);
 }
 
 
@@ -180,7 +168,6 @@ function movimentaDragao(tecla){
     if(tecla.key == 'ArrowUp' && velocidadeY != 1){
         velocidadeX = 0
         velocidadeY = -1
-        console.log(cobraCabeça)
         cobraPosicao = 'cima'
 
     }

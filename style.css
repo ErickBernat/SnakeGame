@@ -20,8 +20,10 @@ section{
 
 
 .containerJogo{
-    background-color: rgb(129, 48, 48);
-
+    background-image: linear-gradient(rgba(10, 10, 10, 0.459), rgba(10, 10, 10, 0.432)) ,url(./assets/images/Gemini_Generated_Image_awe8w4awe8w4awe8.jpeg);
+    background-position: center;
+    background-size: 1700px;
+    border: 20px ridge #cc573a;
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(20, 1fr);
@@ -214,6 +216,9 @@ section{
     width: 50%;
     text-align: center;
     height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     h2{
         font-family: fontTitulo;
         letter-spacing: 3px;
@@ -250,8 +255,8 @@ section{
 
 .cobraCorpo{
     width: 100%;
-    height: auto;
-    background-color: #c23d00;
+    height: 100%;
+    background-color: #db5110;
     background-position: center 20%;
     background-repeat: no-repeat;
     background-size: 100px;
