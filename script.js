@@ -22,7 +22,7 @@ let grid=20;
 let comeuMaca = false;
 let gameover = false;
 let cobraPosicao = 'baixo'
-
+let jogoAtivo = true;
 document.addEventListener('keydown',movimentaDragao)
 
 
@@ -53,7 +53,7 @@ geraArmadilha()
 
 function iniciaJogo(){
 let html;
-
+jogoAtivo = true
 
 if(gameover == true){
 
@@ -95,49 +95,49 @@ if(gameover == true){
     for(let i=1; i< arrayCobra.length; i++){
         if(arrayCobra[0][0] == arrayCobra[i][0] && arrayCobra[0][1] == arrayCobra[i][1]){
             gameover = true
-            console.log('entrou == se bateu')
             return
         }
     }
 
     if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] > 20 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >20  )){
         gameover = true;
-        console.log('entrou == bateuNoMuro')
         return
     }
 
 
-    html+=`<div id='cobraCabeca' class='cobraCabeca' style="grid-area:${arrayCobra[0][1]}/${arrayCobra[0][0]};" ></div>`
+    html+=`<div id='dragaoCabeca' class='dragaoCabeca' style="grid-area:${arrayCobra[0][1]}/${arrayCobra[0][0]};" ></div>`
 
-
-for(let contador =1; contador<arrayCobra.length;contador++){
-    
-    html+=`<div id='cobra${contador}' class='cobraCorpo' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};" ></div>`
-
-}
+    for (let contador = 1; contador < arrayCobra.length; contador++) {
+        html += `<div id='dragao${contador}' class='dragaoCorpo' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};"></div>`;
+    }
 
 
 containerJogo.innerHTML = html
+
   pontuacao.innerHTML=`<h2>Pontuação: ${arrayCobra.length-1}</h2>`;
   pontuacao.innerHTML+=`<h2>Record: ${localStorage.getItem('maiorPontuacao')}</h2>`
 
-  cobraCabeça = document.querySelector('#cobraCabeca');
+  cobraCabeça = document.querySelector('#dragaoCabeca');
 
 
    
 
   if(cobraPosicao == 'cima'){
-      cobraCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
-      
+    cobraCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
+    cobraCabeça.style.backgroundPosition = '-7px -7px';
   }
   if(cobraPosicao == 'baixo'){
-      cobraCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
+    cobraCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
+  
+    cobraCabeça.style.backgroundPosition = '-10px -21px';
   }
   if(cobraPosicao == 'direito'){
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
+    cobraCabeça.style.backgroundPosition = '-15px -20px';
   }
   if(cobraPosicao == 'esquerdo'){
     cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
+    cobraCabeça.style.backgroundPosition = '-6px -10px'
 }
 
 
@@ -145,12 +145,11 @@ console.log(gameover)
 }
 
 function fechaRegras(){
-            regras.style.display = 'none' 
+    regras.style.display = 'none' 
 }
 
 function visualizacaoModaRegras(){
-     regras.style.display = 'flex'
-     
+     regras.style.display = 'flex'  
 }
 
 regras.addEventListener('click',()=>{
@@ -168,6 +167,9 @@ function adidionaEventoIniciaJogo(){
 
 function movimentaDragao(tecla){
 
+    if(jogoAtivo == false){
+        return
+    }
 
     if(tecla.key == 'ArrowUp' && velocidadeY != 1){
         velocidadeX = 0
@@ -194,8 +196,8 @@ function movimentaDragao(tecla){
 
 function reiniciaJogo(){
     gameover = false
-    cobraX=5;
-    cobraY=5;
+    cobraX=10;
+    cobraY=10;
     velocidadeX=0, velocidadeY=0;
     arrayCobra = []
     geraArmadilha()
@@ -210,10 +212,12 @@ function voltaMenu(){
 
 function gameOver(){
     gameover = false
+    jogoAtivo = false; 
 
     if(localStorage.getItem('maiorPontuacao') < arrayCobra.length-1){
         localStorage.setItem('maiorPontuacao',arrayCobra.length-1) 
     }
+
     modalDerrota.style.display = 'flex'
     pontuacaoDerrota.innerHTML = `<h2>${arrayCobra.length-1}</h2>`
     

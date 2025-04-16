@@ -247,7 +247,7 @@ section{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        animation: abrePergaminhoDerrota 2s ease;
+        animation: abrePergaminhoDerrota 1s ease;
         transform-origin: top;
         width: 60%;
         height: 80%;
@@ -263,7 +263,7 @@ section{
     justify-content: center;
     width: 40%;
     height: 70%;
-    animation: abrePergaminhoDerrota 2s ease;
+    animation: abrePergaminhoDerrota 1s ease;
     transform-origin: top;
     .textoDerrota{
         text-align: center;
@@ -338,20 +338,19 @@ section{
     background-size: 100px;
 }
 
-.cobraCorpo{
-    width: 100%;
-    height: 100%;
-    background-color: #db5110;
-    background-position: center 20%;
-    background-repeat: no-repeat;
-    background-size: 100px;
-}
-
-.cobraCabeca{
+.dragaoCorpo{
     width: auto;
     height: auto;
-    background-position: center;
+    background-image: url(./assets/images/ChatGPT\ Image\ 16\ de\ abr.\ de\ 2025\,\ 14_25_11.png);
+    background-repeat: no-repeat;
+    background-position: bottom !important;
     background-size: cover;
+}
+
+.dragaoCabeca{
+    width: auto;
+    height: auto;
+    background-size: 60px 60px;
     background-repeat: no-repeat;
 
 }
