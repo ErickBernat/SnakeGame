@@ -15,7 +15,7 @@ let armadilhaX=0, armadilhaY=0;
 let width = 50, height= 80;
 let setintervalId =0;
 let setintervalId2 =0;
-let cobraX=5,cobraY=5;
+let cobraX=10,cobraY=10;
 let velocidadeX=0, velocidadeY=0;
 let contador=1
 let grid=20;
@@ -29,7 +29,6 @@ document.addEventListener('keydown',movimentaDragao)
 document.addEventListener('DOMContentLoaded' ,()=>{
     containerJogo.style.width = `${width}%`;
     containerJogo.style.height = `${height}%`;
-    localStorage.setItem('maiorPontuacao',0);
     menuGame.innerHTML+=`
                           
     <div class="infoMenu">
