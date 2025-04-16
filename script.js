@@ -29,6 +29,7 @@ document.addEventListener('keydown',movimentaDragao)
 document.addEventListener('DOMContentLoaded' ,()=>{
     containerJogo.style.width = `${width}%`;
     containerJogo.style.height = `${height}%`;
+    localStorage.setItem('maiorPontuacao',0);
     menuGame.innerHTML+=`
                           
     <div class="infoMenu">
@@ -40,12 +41,12 @@ document.addEventListener('DOMContentLoaded' ,()=>{
     </div>
         <img src="./assets/images/pngtree-chinese-dragon-culture-mythological-animal-vector-png-image_23483686.png" alt="">
     <div class="botoesGame">
-            <button onclick="adidionaEventoBotoes()" id="botaoStart" class="botoes">Start</button>
+            <button onclick="adidionaEventoIniciaJogo()" id="botaoStart" class="botoes">Start</button>
             <button onclick="visualizacaoModaRegras()" class="botoes">Regras</button>
     </div>
     </div>
     `
-})
+});
 
 
 geraComida()
@@ -118,8 +119,8 @@ for(let contador =1; contador<arrayCobra.length;contador++){
 
 
 containerJogo.innerHTML = html
-  pontuacao.innerHTML=`<h2>pontuacao: ${arrayCobra.length-1}</h2>`;
-  pontuacao.innerHTML+=`<h2>pontuacao Maxima: ${arrayCobra.length-1}</h2>`
+  pontuacao.innerHTML=`<h2>Pontuação: ${arrayCobra.length-1}</h2>`;
+  pontuacao.innerHTML+=`<h2>Record: ${localStorage.getItem('maiorPontuacao')}</h2>`
 
   cobraCabeça = document.querySelector('#cobraCabeca');
 
@@ -158,16 +159,13 @@ regras.addEventListener('click',()=>{
 
  })
 
-function adidionaEventoBotoes(){
+function adidionaEventoIniciaJogo(){
 
     menuGame.style.display = 'none'
     setintervalId = setInterval(geraArmadilha,5000);
     setintervalId = setInterval(iniciaJogo,100);
     
 }
-
-
-
 
 function movimentaDragao(tecla){
 
@@ -213,6 +211,10 @@ function voltaMenu(){
 
 function gameOver(){
     gameover = false
+
+    if(localStorage.getItem('maiorPontuacao') < arrayCobra.length-1){
+        localStorage.setItem('maiorPontuacao',arrayCobra.length-1) 
+    }
     modalDerrota.style.display = 'flex'
     pontuacaoDerrota.innerHTML = `<h2>${arrayCobra.length-1}</h2>`
     

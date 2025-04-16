@@ -247,6 +247,8 @@ section{
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        animation: abrePergaminhoDerrota 2s ease;
+        transform-origin: top;
         width: 60%;
         height: 80%;
 
@@ -259,14 +261,20 @@ section{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15rem;
     width: 40%;
     height: 70%;
-
+    animation: abrePergaminhoDerrota 2s ease;
+    transform-origin: top;
     .textoDerrota{
         text-align: center;
         
 
+    }
+
+    img{
+        width: 7rem;
+        height: auto;
+        margin: 40px;
     }
 
     h2{
@@ -280,10 +288,22 @@ section{
     button{
         width: auto;
         height: auto;
-        font-family: fontTitulo;
-        padding: 10px;
-        font-size: 1.5rem;
+        background-color: #ce5016;
+        color: black;
+        font-family: 'Courier New', Courier, monospace;
+        border:none;
+        padding: 15px;
+        font-size: 1rem;
         cursor: pointer;
+    }
+}
+
+@keyframes abrePergaminhoDerrota {
+    0%{
+        transform: scaleY(0);
+    }
+    100%{
+        transform: scaleY(1);
     }
 }
 
