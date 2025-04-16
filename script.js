@@ -5,7 +5,7 @@ let botoes =  document.querySelectorAll('.botoes');
 let pontuacao =  document.getElementById('pontuacao');
 let pergaminho = document.getElementById('pergaminho');
 let regras = document.querySelector('.containerRegras');
-
+let modalDerrota = document.querySelector('#derrota')
 let cobraCabeça = document.querySelector('#cobraCabeca');
 let arrayCobra = [];
 let comidaX=0, comidaY=0;
@@ -191,8 +191,7 @@ function movimentaDragao(tecla){
 
 function reiniciaJogo(){
     gameover = false
-    alert('voce Perdeu')
-    location.reload()
+    modalDerrota.style.display = 'flex'
 }
 
 function geraComida(){

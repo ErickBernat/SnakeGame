@@ -227,6 +227,71 @@ section{
     }
 }
 
+.containerDerrota{
+    position: absolute;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.411);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerPergaminhoDerrota{
+        background-image: url(./assets/images/ChatGPT_Image_16_de_abr._de_2025__09_33_48-removebg-preview.png);
+        background-repeat: no-repeat;
+        background-size: 800px 900px;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        height: 80%;
+
+
+}
+
+.containerItensPergaminhoDerrota{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15rem;
+    width: 40%;
+    height: 70%;
+
+    .textoDerrota{
+        text-align: center;
+        
+
+    }
+
+    h2{
+        padding: 10px;
+        font-family: fontTitulo;
+        letter-spacing: 3px;
+        color:black;
+        font-size: 3rem;
+    }
+
+    button{
+        width: auto;
+        height: auto;
+        font-family: fontTitulo;
+        padding: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+.botoesDerrota{
+    display: flex;
+    gap: 50px;
+}
+
 @keyframes animacaoLanterna {
     0%{
         transform:rotateX(0deg) ;
