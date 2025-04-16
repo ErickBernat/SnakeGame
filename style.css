@@ -24,6 +24,8 @@ section{
     background-position: center;
     background-size: 1700px;
     border: 20px ridge #cc573a;
+    width: 50%;
+    height: 80%;
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(20, 1fr);
@@ -353,10 +355,4 @@ section{
     background-size: 60px 60px;
     background-repeat: no-repeat;
 
-}
-
-.muro{
-    width: auto;
-    height: auto;
-    background-color: pink;
 }

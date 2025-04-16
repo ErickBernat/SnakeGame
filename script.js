@@ -23,12 +23,11 @@ let comeuMaca = false;
 let gameover = false;
 let cobraPosicao = 'baixo'
 let jogoAtivo = true;
-document.addEventListener('keydown',movimentaDragao)
+
 
 
 document.addEventListener('DOMContentLoaded' ,()=>{
-    containerJogo.style.width = `${width}%`;
-    containerJogo.style.height = `${height}%`;
+
     menuGame.innerHTML+=`
                           
     <div class="infoMenu">
@@ -46,17 +45,16 @@ document.addEventListener('DOMContentLoaded' ,()=>{
     </div>
     `
 });
-
+document.addEventListener('keydown',movimentaDragao);
 
 geraComida()
 geraArmadilha()
 
 function iniciaJogo(){
 let html;
-jogoAtivo = true
+
 
 if(gameover == true){
-
     gameOver()
     return
 }
@@ -140,8 +138,6 @@ containerJogo.innerHTML = html
     cobraCabeça.style.backgroundPosition = '-6px -10px'
 }
 
-
-console.log(gameover)
 }
 
 function fechaRegras(){
@@ -158,17 +154,30 @@ regras.addEventListener('click',()=>{
  })
 
 function adidionaEventoIniciaJogo(){
-
+    jogoAtivo = true
     menuGame.style.display = 'none'
     setintervalId = setInterval(geraArmadilha,5000);
     setintervalId = setInterval(iniciaJogo,100);
     
 }
-
+let podeMover = true; // controla se pode ou não mover
 function movimentaDragao(tecla){
+    if (!jogoAtivo || !podeMover) {
+        return;
+    }
+
+    // Bloqueia movimentações por 100ms
+    podeMover = false;
+    setTimeout(() => {
+        podeMover = true;
+    }, 100); // tempo em milissegundos
 
     if(jogoAtivo == false){
         return
+    }
+
+    if(teclaAtiva = true){
+
     }
 
     if(tecla.key == 'ArrowUp' && velocidadeY != 1){
@@ -196,6 +205,7 @@ function movimentaDragao(tecla){
 
 function reiniciaJogo(){
     gameover = false
+    jogoAtivo = true
     cobraX=10;
     cobraY=10;
     velocidadeX=0, velocidadeY=0;
@@ -226,6 +236,14 @@ function gameOver(){
 function geraComida(){
     comidaX = Math.floor(Math.random(grid)*grid)+1;
     comidaY =  Math.floor(Math.random(grid)*grid)+1;
+    for(let contador=0; contador< arrayCobra.length; contador++){
+        if(arrayCobra[contador][0] == comidaX && arrayCobra[contador][1] == comidaY){
+            geraArmadilha()
+        }
+    }
+    if(comidaX == armadilhaX || comidaY == armadilhaY){
+        geraComida()
+    }
 }
 function geraArmadilha(){
     armadilhaX = Math.floor(Math.random(grid)*grid)+1;
