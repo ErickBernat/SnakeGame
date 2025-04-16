@@ -3,8 +3,10 @@ let menuGame = document.getElementById('menuGame');
 let containerJogo = document.querySelector('.containerJogo');
 let botoes =  document.querySelectorAll('.botoes');
 let pontuacao =  document.getElementById('pontuacao');
-let pergaminho = document.getElementById('pergaminho')
-let regras = document.querySelector('.containerRegras')
+let pergaminho = document.getElementById('pergaminho');
+let regras = document.querySelector('.containerRegras');
+
+let cobraCabeça = document.querySelector('#cobraCabeca');
 let arrayCobra = [];
 let comidaX=0, comidaY=0;
 let armadilhaX=0, armadilhaY=0;
@@ -17,6 +19,9 @@ let contador=1
 let grid=20;
 let comeuMaca = false;
 let gameover = false;
+let cobraPosicao = 'baixo'
+
+document.addEventListener('keydown',movimentaDragao)
 
 
 document.addEventListener('DOMContentLoaded' ,()=>{
@@ -42,6 +47,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
 
 
 geraComida()
+geraArmadilha()
 
 function iniciaJogo(){
 let html;
@@ -50,6 +56,8 @@ if(gameover){
     reiniciaJogo()
     return
 }
+
+
 
 
 
@@ -85,25 +93,61 @@ if(gameover){
     
     for(let i=1; i< arrayCobra.length; i++){
         if(arrayCobra[0][0] == arrayCobra[i][0] && arrayCobra[0][1] == arrayCobra[i][1]){
+
+            console.log(arrayCobra[i][0][1])
             gameover = true
         }
     }
 
-    if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] >= 30 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >=30  )){
+    if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] >20 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >20  )){
         gameover = true;
     }
 
 
-    html+=`<div id='cobra' class='cobraCabeca' style="grid-area:${arrayCobra[0][1]}/${arrayCobra[0][0]};" ></div>`
-   
+    html+=`<div id='cobraCabeca' class='cobraCabeca' style="grid-area:${arrayCobra[0][1]}/${arrayCobra[0][0]};" ></div>`
+
+
 for(let contador =1; contador<arrayCobra.length;contador++){
     
-    html+=`<div id='cobra' class='cobra' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};" ></div>`
+    html+=`<div id='cobra${contador}' class='cobraCorpo' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};" ></div>`
+
+
 }
 
 
 containerJogo.innerHTML = html
   pontuacao.innerHTML=`<h2>pontuacao: ${arrayCobra.length-1}</h2>`;
+
+  cobraCabeça = document.querySelector('#cobraCabeca');
+
+
+   
+
+  if(cobraPosicao == 'cima'){
+      cobraCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
+      let cobraCorpo = document.querySelectorAll(`.cobraCorpo`);
+
+      cobraCorpo.forEach(item =>{
+          console.log(item)
+           item.style.backgroundColor = 'red'
+      })
+  }
+  if(cobraPosicao == 'baixo'){
+      cobraCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
+      let cobraCorpo = document.querySelectorAll(`.cobraCorpo`);
+
+      cobraCorpo.forEach(item =>{
+          console.log(item)
+           item.style.backgroundColor = 'red'
+      })
+  }
+  if(cobraPosicao == 'direito'){
+    cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
+  }
+  if(cobraPosicao == 'esquerdo'){
+    cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
+}
+
 }
 
 function fechaRegras(){
@@ -112,7 +156,14 @@ function fechaRegras(){
 
 function visualizacaoModaRegras(){
      regras.style.display = 'flex'
+     
 }
+
+regras.addEventListener('click',()=>{
+    console.log('apertou')
+    regras.style.display = 'none'
+
+ })
 
 function adidionaEventoBotoes(){
     menuGame.style.display = 'none'
@@ -122,30 +173,31 @@ function adidionaEventoBotoes(){
 
 
 
-document.addEventListener('keydown',movimentaDragao)
 
 function movimentaDragao(tecla){
-    console.log(tecla.key)
 
-    setTimeout(() => {
-        
-    }, 100);
 
     if(tecla.key == 'ArrowUp' && velocidadeY != 1){
         velocidadeX = 0
         velocidadeY = -1
+        console.log(cobraCabeça)
+        cobraPosicao = 'cima'
+
     }
     if(tecla.key == 'ArrowDown' && velocidadeY != -1){
         velocidadeX = 0
         velocidadeY = 1
+        cobraPosicao = 'baixo'
     }
     if(tecla.key == 'ArrowLeft' && velocidadeX != 1){
         velocidadeX = -1
         velocidadeY = 0
+        cobraPosicao = 'esquerdo'
     }
     if(tecla.key == 'ArrowRight' && velocidadeX != -1){
         velocidadeX = 1
         velocidadeY =0
+         cobraPosicao = 'direito'
     }
 }
 

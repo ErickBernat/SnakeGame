@@ -28,6 +28,10 @@ section{
 }
 .Jogo{
     display: flex;
+    background-image: url(./assets/images/Gemini_Generated_Image_awe8w4awe8w4awe8.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     flex-direction: column;
 }
 
@@ -57,7 +61,7 @@ section{
 
 .Pergaminho{
     width: 90%;
-    height: 90%;
+    height: 100%;
     align-items: center;
     justify-content: center;
     background-image:url(/assets/images/pergaminho1.webp);
@@ -102,6 +106,7 @@ section{
 .cabecaDragao{
     width: 50px;
     height: 50px;
+    
     background-color: #e65715;
 }
 
@@ -212,7 +217,7 @@ section{
     h2{
         font-family: fontTitulo;
         letter-spacing: 3px;
-        color: black;
+        color: white;
         font-size: 3rem;
     }
 }
@@ -229,9 +234,10 @@ section{
 .comida{
     width: auto;
     height: auto;
-    background-image: url(./assets/images/pixel-pastels-littledr3ams-10_106725.webp);
+    background-image: url(./assets/images/9303f679e92050a.png);
     background-position: center;
     background-size: cover;
+    background-size:60px;
 }
 
 .armadilha{
@@ -242,10 +248,10 @@ section{
     background-size: 100px;
 }
 
-.cobra{
+.cobraCorpo{
     width: 100%;
     height: auto;
-    background-color: #7FA7BC;
+    background-color: #c23d00;
     background-position: center 20%;
     background-repeat: no-repeat;
     background-size: 100px;
@@ -254,11 +260,10 @@ section{
 .cobraCabeca{
     width: auto;
     height: auto;
-    background-color: #e65715;
-    border-radius: 0px 0px 0px 0px;
-    background-position: 100% 90%;
+    background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-size:70px;
+
 }
 
 .muro{
