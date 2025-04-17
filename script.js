@@ -10,10 +10,9 @@ let pontuacaoDerrota = document.getElementById('pontuacaoDerrota')
 let arrayDragao = [];
 let comidaX=0, comidaY=0;
 let armadilhaX=0, armadilhaY=0;
-let width = 50, height= 80;
 let setintervalId =0;
 let setintervalIdArmadilha =0;
-let cobraX=10,cobraY=10;
+let dragaoX=10,dragaoY=10;
 let velocidadeX=0, velocidadeY=0;
 let grid=20;
 let comeuMaca = false;
@@ -25,7 +24,6 @@ let podeMover = true;
 
 
 document.addEventListener('DOMContentLoaded' ,()=>{
-
     menuGame.innerHTML+=`
     <div class="infoMenu">
                     <div class="tituloGame">
@@ -34,7 +32,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
             <h3>Version Chinese</h3>
         </div>                    
     </div>
-        <img src="./assets/images/DragaoMenu.webp" alt="imagemDragao" width="800" height="400">
+        <img src="./assets/images/DragaoMenu.webp" alt="imagemDragao" width="715" height="360">
     <div class="botoesGame">
             <button onclick="adicionaEventoIniciaJogo()" id="botaoStart" class="botoes">Start</button>
             <button onclick="visualizacaoModaRegras()" class="botoes">Regras</button>
@@ -44,20 +42,17 @@ document.addEventListener('DOMContentLoaded' ,()=>{
 
 });
 document.addEventListener('keydown',movimentaDragao);
-
 geraComida()
 geraArmadilha()
 
 function iniciaJogo(){
-let html;
+    let html;
 
 
-if(gameover == true){
-    gameOver()
-    return
-}
-
-
+    if(gameover == true){
+        gameOver()
+        return
+    }
     html =`
         <div id='comida' class='comida' style="grid-area:${comidaY}/${comidaX};" ></div>
     `   
@@ -65,14 +60,14 @@ if(gameover == true){
     <div id='armadilha' class='armadilha' style="grid-area:${armadilhaY}/${armadilhaX};" ></div>
     ` 
 
-    if(cobraX ===comidaX && cobraY === comidaY){
+    if(dragaoX ===comidaX && dragaoY === comidaY){
         geraComida();
       
         let ultimaParte = arrayDragao[arrayDragao.length - 1];
         arrayDragao.push([ultimaParte]);
     }
 
-    if(cobraX === armadilhaX && cobraY === armadilhaY){
+    if(dragaoX === armadilhaX && dragaoY === armadilhaY){
         gameover = true
         return
     }
@@ -81,10 +76,10 @@ if(gameover == true){
         arrayDragao[i] = arrayDragao[i-1]
     }
     
-    arrayDragao[0]= [cobraX,cobraY];  
+    arrayDragao[0]= [dragaoX,dragaoY];  
 
-    cobraX += velocidadeX;
-    cobraY += velocidadeY;
+    dragaoX += velocidadeX;
+    dragaoY += velocidadeY;
    
     
     for(let i=1; i< arrayDragao.length; i++){
@@ -107,40 +102,35 @@ if(gameover == true){
     }
 
 
-containerJogo.innerHTML = html
+    containerJogo.innerHTML = html
 
-  pontuacao.innerHTML=`<h2>Pontuação: ${arrayDragao.length-1}</h2>`;
+    pontuacao.innerHTML=`<h2>Pontuação: ${arrayDragao.length-1}</h2>`;
 
-  if(localStorage.getItem('maiorPontuacao') == null){
-    pontuacao.innerHTML+=`<h2>Recorde: ${0}</h2>`
-  }else{
-    pontuacao.innerHTML+=`<h2>Recorde: ${localStorage.getItem('maiorPontuacao')}</h2>`
-
-  }
+    if(localStorage.getItem('maiorPontuacao') == null){
+        pontuacao.innerHTML+=`<h2>Recorde: ${0}</h2>`
+    }else{
+        pontuacao.innerHTML+=`<h2>Recorde: ${localStorage.getItem('maiorPontuacao')}</h2>`
+    }
   
 
-  dragaoCabeça = document.querySelector('#dragaoCabeca');
+    dragaoCabeça = document.querySelector('#dragaoCabeca');
 
-
-   
-
-  if(cobraDirecao == 'cima'){
-    dragaoCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
-    dragaoCabeça.style.backgroundPosition = '-7px -7px';
-  }
-  if(cobraDirecao == 'baixo'){
-    dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
-  
-    dragaoCabeça.style.backgroundPosition = '-10px -21px';
-  }
-  if(cobraDirecao == 'direito'){
-    dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
-    dragaoCabeça.style.backgroundPosition = '-15px -20px';
-  }
-  if(cobraDirecao == 'esquerdo'){
-    dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
-    dragaoCabeça.style.backgroundPosition = '-6px -10px'
-}
+    if(cobraDirecao == 'cima'){
+        dragaoCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
+        dragaoCabeça.style.backgroundPosition = '-7px -7px';
+    }
+    if(cobraDirecao == 'baixo'){
+        dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
+        dragaoCabeça.style.backgroundPosition = '-10px -21px';
+    }
+    if(cobraDirecao == 'direito'){
+        dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
+        dragaoCabeça.style.backgroundPosition = '-15px -20px';
+    }
+    if(cobraDirecao == 'esquerdo'){
+        dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
+        dragaoCabeça.style.backgroundPosition = '-6px -10px'
+    }
 
 }
 
@@ -209,8 +199,8 @@ function movimentaDragao(tecla){
 function reiniciaJogo(){
     gameover = false
     jogoAtivo = true
-    cobraX=10;
-    cobraY=10;
+    dragaoX=10;
+    dragaoY=10;
     velocidadeX=0, velocidadeY=0;
     arrayDragao = []
     geraArmadilha()

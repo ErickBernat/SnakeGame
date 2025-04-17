@@ -1,4 +1,4 @@
-projeto="/opt/dev/projects/projetosEvidencia/Caprice"
+projeto="/opt/dev/projects/projetosEvidencia/SnakeGame"
 nginx="/var/www/html"
 
 if [ -d "$projeto" ] && [ -d "$nginx" ]; then
