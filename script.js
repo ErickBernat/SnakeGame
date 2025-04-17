@@ -111,7 +111,12 @@ containerJogo.innerHTML = html
 
   pontuacao.innerHTML=`<h2>Pontuação: ${arrayDragao.length-1}</h2>`;
 
+  if(localStorage.getItem('maiorPontuacao') == null){
+    pontuacao.innerHTML+=`<h2>Recorde: ${0}</h2>`
+  }else{
+    pontuacao.innerHTML+=`<h2>Recorde: ${localStorage.getItem('maiorPontuacao')}</h2>`
 
+  }
   
 
   dragaoCabeça = document.querySelector('#dragaoCabeca');
