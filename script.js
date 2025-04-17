@@ -1,19 +1,18 @@
-
 let menuGame = document.getElementById('menuGame');
 let containerJogo = document.querySelector('.containerJogo');
-let botoes =  document.querySelectorAll('.botoes');
 let pontuacao =  document.getElementById('pontuacao');
 let pergaminho = document.getElementById('pergaminho');
 let regras = document.querySelector('.containerRegras');
 let modalDerrota = document.querySelector('#derrota')
-let cobraCabeça = document.querySelector('#cobraCabeca');
+let dragaoCabeça = document.querySelector('#dragaoCabeca');
 let containerItensPergaminho =  document.querySelector('#containerItensPergaminho');
 let pontuacaoDerrota = document.getElementById('pontuacaoDerrota')
-let arrayCobra = [];
+let arrayDragao = [];
 let comidaX=0, comidaY=0;
 let armadilhaX=0, armadilhaY=0;
 let width = 50, height= 80;
 let setintervalId =0;
+let setintervalIdArmadilha =0;
 let cobraX=10,cobraY=10;
 let velocidadeX=0, velocidadeY=0;
 let grid=20;
@@ -28,7 +27,6 @@ let podeMover = true;
 document.addEventListener('DOMContentLoaded' ,()=>{
 
     menuGame.innerHTML+=`
-                          
     <div class="infoMenu">
                     <div class="tituloGame">
         <h2>Snake Game</h2>
@@ -36,13 +34,14 @@ document.addEventListener('DOMContentLoaded' ,()=>{
             <h3>Version Chinese</h3>
         </div>                    
     </div>
-        <img src="./assets/images/pngtree-chinese-dragon-culture-mythological-animal-vector-png-image_23483686.png" alt="">
+        <img src="./assets/images/DragaoMenu.webp" alt="imagemDragao" width="800" height="400">
     <div class="botoesGame">
             <button onclick="adicionaEventoIniciaJogo()" id="botaoStart" class="botoes">Start</button>
             <button onclick="visualizacaoModaRegras()" class="botoes">Regras</button>
     </div>
     </div>
     `
+
 });
 document.addEventListener('keydown',movimentaDragao);
 
@@ -69,72 +68,73 @@ if(gameover == true){
     if(cobraX ===comidaX && cobraY === comidaY){
         geraComida();
       
-        let ultimaParte = arrayCobra[arrayCobra.length - 1];
-        arrayCobra.push([ultimaParte]);
+        let ultimaParte = arrayDragao[arrayDragao.length - 1];
+        arrayDragao.push([ultimaParte]);
     }
 
     if(cobraX === armadilhaX && cobraY === armadilhaY){
         gameover = true
-        console.log('entrou == comida')
         return
     }
 
-    for(let i = arrayCobra.length-1 ; i > 0; i--){
-        arrayCobra[i] = arrayCobra[i-1]
+    for(let i = arrayDragao.length-1 ; i > 0; i--){
+        arrayDragao[i] = arrayDragao[i-1]
     }
     
-    arrayCobra[0]= [cobraX,cobraY];  
+    arrayDragao[0]= [cobraX,cobraY];  
 
     cobraX += velocidadeX;
     cobraY += velocidadeY;
    
     
-    for(let i=1; i< arrayCobra.length; i++){
-        if(arrayCobra[0][0] == arrayCobra[i][0] && arrayCobra[0][1] == arrayCobra[i][1]){
+    for(let i=1; i< arrayDragao.length; i++){
+        if(arrayDragao[0][0] == arrayDragao[i][0] && arrayDragao[0][1] == arrayDragao[i][1]){
             gameover = true
             return
         }
     }
 
-    if((arrayCobra[0][0] <= 0 || arrayCobra[0][0] > 20 || arrayCobra[0][1] <= 0 || arrayCobra[0][1] >20  )){
+    if((arrayDragao[0][0] <= 0 || arrayDragao[0][0] > 20 || arrayDragao[0][1] <= 0 || arrayDragao[0][1] >20  )){
         gameover = true;
         return
     }
 
 
-    html+=`<div id='dragaoCabeca' class='dragaoCabeca' style="grid-area:${arrayCobra[0][1]}/${arrayCobra[0][0]};" ></div>`
+    html+=`<div id='dragaoCabeca' class='dragaoCabeca' style="grid-area:${arrayDragao[0][1]}/${arrayDragao[0][0]};" ></div>`
 
-    for (let contador = 1; contador < arrayCobra.length; contador++) {
-        html += `<div id='dragao${contador}' class='dragaoCorpo' style="grid-area:${arrayCobra[contador][1]}/${arrayCobra[contador][0]};"></div>`;
+    for (let contador = 1; contador < arrayDragao.length; contador++) {
+        html += `<div id='dragao${contador}' class='dragaoCorpo' style="grid-area:${arrayDragao[contador][1]}/${arrayDragao[contador][0]};"></div>`;
     }
 
 
 containerJogo.innerHTML = html
 
-  pontuacao.innerHTML=`<h2>Pontuação: ${arrayCobra.length-1}</h2>`;
-  pontuacao.innerHTML+=`<h2>Record: ${localStorage.getItem('maiorPontuacao')}</h2>`
+  pontuacao.innerHTML=`<h2>Pontuação: ${arrayDragao.length-1}</h2>`;
 
-  cobraCabeça = document.querySelector('#dragaoCabeca');
+
+  
+
+  dragaoCabeça = document.querySelector('#dragaoCabeca');
 
 
    
 
   if(cobraDirecao == 'cima'){
-    cobraCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
-    cobraCabeça.style.backgroundPosition = '-7px -7px';
+    dragaoCabeça.style.backgroundImage = 'url(./assets/images/dragao_frente.png)'
+    dragaoCabeça.style.backgroundPosition = '-7px -7px';
   }
   if(cobraDirecao == 'baixo'){
-    cobraCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
+    dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragao_cima.png)'
   
-    cobraCabeça.style.backgroundPosition = '-10px -21px';
+    dragaoCabeça.style.backgroundPosition = '-10px -21px';
   }
   if(cobraDirecao == 'direito'){
-    cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
-    cobraCabeça.style.backgroundPosition = '-15px -20px';
+    dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragon_right.png)'
+    dragaoCabeça.style.backgroundPosition = '-15px -20px';
   }
   if(cobraDirecao == 'esquerdo'){
-    cobraCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
-    cobraCabeça.style.backgroundPosition = '-6px -10px'
+    dragaoCabeça.style.backgroundImage= 'url(./assets/images/dragon_left.png)'
+    dragaoCabeça.style.backgroundPosition = '-6px -10px'
 }
 
 }
@@ -155,8 +155,8 @@ regras.addEventListener('click',()=>{
 function adicionaEventoIniciaJogo(){
     jogoAtivo = true
     menuGame.style.display = 'none'
-    setintervalId = setInterval(geraArmadilha,5000);
-    setintervalId = setInterval(iniciaJogo,100);
+    setintervalIdArmadilha = setInterval(geraArmadilha,5000);
+    setintervalId = setInterval(iniciaJogo,200);
     
 }
 
@@ -168,7 +168,7 @@ function movimentaDragao(tecla){
     podeMover = false;
     setTimeout(() => {
         podeMover = true;
-    }, 100);
+    }, 200);
 
     if(jogoAtivo == false){
         return
@@ -207,7 +207,7 @@ function reiniciaJogo(){
     cobraX=10;
     cobraY=10;
     velocidadeX=0, velocidadeY=0;
-    arrayCobra = []
+    arrayDragao = []
     geraArmadilha()
     geraComida()
     modalDerrota.style.display = 'none'
@@ -222,37 +222,37 @@ function gameOver(){
     gameover = false
     jogoAtivo = false; 
 
-    if(localStorage.getItem('maiorPontuacao') < arrayCobra.length-1){
-        localStorage.setItem('maiorPontuacao',arrayCobra.length-1) 
+    if(localStorage.getItem('maiorPontuacao') < arrayDragao.length-1){
+        localStorage.setItem('maiorPontuacao',arrayDragao.length-1) 
     }
 
     modalDerrota.style.display = 'flex'
-    pontuacaoDerrota.innerHTML = `<h2>${arrayCobra.length-1}</h2>`
+    pontuacaoDerrota.innerHTML = `<h2>${arrayDragao.length-1}</h2>`
     
 }
 
 function geraComida(){
     comidaX = Math.floor(Math.random(grid)*grid)+1;
     comidaY =  Math.floor(Math.random(grid)*grid)+1;
-    for(let contador=0; contador< arrayCobra.length; contador++){
-        if(arrayCobra[contador][0] == comidaX && arrayCobra[contador][1] == comidaY){
-            geraArmadilha()
+    for(let contador=0; contador< arrayDragao.length; contador++){
+        if(arrayDragao[contador][0] == comidaX && arrayDragao[contador][1] == comidaY){
+            geraComida()
         }
     }
-    if(comidaX == armadilhaX || comidaY == armadilhaY){
+    if(comidaX == armadilhaX && comidaY == armadilhaY){
         geraComida()
     }
 }
 function geraArmadilha(){
     armadilhaX = Math.floor(Math.random(grid)*grid)+1;
     armadilhaY =  Math.floor(Math.random(grid)*grid)+1;
-    for(let i=1; i< arrayCobra.length; i++){
-        if(arrayCobra[0][0] == armadilhaX && arrayCobra[0][1] == armadilhaY){
+    for(let contador=1; contador< arrayDragao.length; contador++){
+        if(arrayDragao[contador][0] == armadilhaX && arrayDragao[contador][1] == armadilhaY){
             geraArmadilha()
         }
     }
 
-    if(armadilhaX == comidaX || armadilhaY == comidaY){
+    if(armadilhaX == comidaX && armadilhaY == comidaY){
         geraArmadilha()
     }
 }

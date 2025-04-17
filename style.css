@@ -20,7 +20,7 @@ section{
 
 
 .containerJogo{
-    background-image: linear-gradient(rgba(10, 10, 10, 0.459), rgba(10, 10, 10, 0.432)) ,url(./assets/images/Gemini_Generated_Image_awe8w4awe8w4awe8.jpeg);
+    background-image: linear-gradient(rgba(10, 10, 10, 0.459), rgba(10, 10, 10, 0.432)) ,url(./assets/images/imagemFundoJogo.webp);
     background-position: center;
     background-size: 1700px;
     border: 20px ridge #cc573a;
@@ -32,7 +32,7 @@ section{
 }
 .Jogo{
     display: flex;
-    background-image: url(./assets/images/Gemini_Generated_Image_awe8w4awe8w4awe8.jpeg);
+    background-image: url(./assets/images/imagemFundoJogo.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -68,7 +68,7 @@ section{
     height: 100%;
     align-items: center;
     justify-content: center;
-    background-image:url(/assets/images/pergaminho1.webp);
+    background-image:url(/assets/images/pergaminhoRegras.webp);
     background-position: center;
     background-size: 100% 110%;
     background-repeat: no-repeat;
@@ -157,7 +157,7 @@ section{
 
 .menuGame{
     background-color: rgb(165, 42, 42);
-    background-image: url(./assets/images/aesthetic-pixel-background.avif);
+    background-image: url(./assets/images/FundoMenu.avif);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -241,7 +241,7 @@ section{
 }
 
 .containerPergaminhoDerrota{
-        background-image: url(./assets/images/ChatGPT_Image_16_de_abr._de_2025__09_33_48-removebg-preview.png);
+        background-image: url(./assets/images/pergaminhoDerrota.webp);
         background-repeat: no-repeat;
         background-size: 800px 900px;
         background-position: center;
@@ -312,6 +312,10 @@ section{
 .botoesDerrota{
     display: flex;
     gap: 50px;
+
+    button:hover{
+        color: white;
+    }
 }
 
 @keyframes animacaoLanterna {
@@ -326,7 +330,7 @@ section{
 .comida{
     width: auto;
     height: auto;
-    background-image: url(./assets/images/9303f679e92050a.png);
+    background-image: url(./assets/images/comida.webp);
     background-position: center;
     background-size: cover;
     background-size:60px;
@@ -335,7 +339,7 @@ section{
 .armadilha{
     width: auto;
     height: auto;
-    background-image: url(./assets/images/darien-wong-beartrap-hold.gif);
+    background-image: url(./assets/images/armadilha.gif);
     background-position: 50% 70%;
     background-size: 100px;
 }
@@ -343,7 +347,7 @@ section{
 .dragaoCorpo{
     width: auto;
     height: auto;
-    background-image: url(./assets/images/ChatGPT\ Image\ 16\ de\ abr.\ de\ 2025\,\ 14_25_11.png);
+    background-image: url(./assets/images/EscamaDragao.webp);
     background-repeat: no-repeat;
     background-position: bottom !important;
     background-size: cover;
